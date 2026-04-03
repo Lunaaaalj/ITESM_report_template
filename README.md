@@ -5,7 +5,7 @@ Plantilla de LaTeX para reportes académicos del Tecnológico de Monterrey. Incl
 ## Vista previa
 
 La plantilla genera un reporte con:
-- Portada con logo institucional, título, autor, matrícula, curso y profesor
+- Portada con logo institucional, nombre de la institución y facultad, título, múltiples autores (estilo IEEE) con carrera opcional y correo, curso y profesor
 - Resumen (abstract) en español
 - Tabla de contenidos
 - Ambientes de teoremas, definiciones, ejemplos y observaciones con cajas de color
@@ -33,17 +33,23 @@ pdflatex report.tex  # segunda pasada para referencias y TOC
 
 ### Personalizar
 
-Edita la sección **DATOS DEL REPORTE** en `report.tex` (línea ~260):
+Edita la sección **DATOS DEL REPORTE** en `report.tex` (línea ~275):
 
 ```latex
-\newcommand{\titulo}{TITULO DEL REPORTE}
-\newcommand{\subtitulo}{Escuela de Ingenieria y Ciencias}
-\newcommand{\autor}{Nombre del Autor}
-\newcommand{\matricula}{A00000000}
-\newcommand{\curso}{Clave y Nombre del Curso}
+\newcommand{\titulo}{Título Completo del Reporte}
+\newcommand{\titulocorto}{Título Corto}          % se muestra en encabezados
+\newcommand{\facultad}{Escuela de Ingeniería y Ciencias}
+\newcommand{\curso}{MA1234 --- Nombre del Curso}
+\newcommand{\cursocorto}{MA1234}                  % se muestra en encabezados
 \newcommand{\profesor}{Nombre del Profesor}
 \newcommand{\campus}{Campus}
 \newcommand{\fecha}{\today}
+
+% Autores (agregar uno por línea)
+% Uso: \addautor[Carrera]{Nombre}{correo}  — la carrera es opcional
+\addautor[ITC]{Nombre Autor Uno}{a00000001@tec.mx}
+\addautor[IMT]{Nombre Autor Dos}{a00000002@tec.mx}
+\addautor{Nombre Autor Tres}{a00000003@tec.mx}
 ```
 
 ## Ambientes disponibles
