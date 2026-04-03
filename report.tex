@@ -219,8 +219,8 @@
 % ==============================================================
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\textsc{\curso}}
-\fancyhead[C]{\small\itshape\titulo}
+\fancyhead[L]{\small\textsc{\cursocorto}}
+\fancyhead[C]{\small\itshape\titulocorto}
 \fancyhead[R]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -255,16 +255,40 @@
 \setlength{\parindent}{1.5em}
 
 % ==============================================================
+% AUTORES (comando interno — no editar)
+% ==============================================================
+\makeatletter
+\newcommand{\autores}{}
+\newcommand{\addautor}[3][]{%  [#1] = carrera (opcional), #2 = nombre, #3 = correo
+    \g@addto@macro\autores{%
+        \begin{minipage}[t]{0.28\textwidth}\centering
+            \textsc{#2}\\[2pt]
+            \ifx\relax#1\relax\else{\footnotesize #1}\\[2pt]\fi
+            {\small\textit{#3}}
+        \end{minipage}\hspace{0.04\textwidth}\vspace{0.6cm}%
+    }%
+}
+\makeatother
+
+% ==============================================================
 % DATOS DEL REPORTE — editar solo esta sección
 % ==============================================================
-\newcommand{\titulo}{TITULO DEL REPORTE}
-\newcommand{\subtitulo}{Escuela de Ingenieria y Ciencias}
-\newcommand{\autor}{Nombre del Autor}
-\newcommand{\matricula}{A00000000}
-\newcommand{\curso}{Clave y Nombre del Curso}
+\newcommand{\titulo}{Título Completo del Reporte}
+\newcommand{\titulocorto}{Título Corto}          % se muestra en encabezados
+\newcommand{\facultad}{Escuela de Ingeniería y Ciencias}
+\newcommand{\curso}{MA1234 --- Nombre del Curso}
+\newcommand{\cursocorto}{MA1234}                  % se muestra en encabezados
 \newcommand{\profesor}{Nombre del Profesor}
 \newcommand{\campus}{Campus}
 \newcommand{\fecha}{\today}
+
+% Autores (agregar uno por línea)
+% Uso: \addautor[Carrera]{Nombre}{correo}  — la carrera es opcional
+\addautor[Ing. Ciencias de datos y Matematicas]{Angel E. Luna}{a00842657@tec.mx}
+\addautor[Ing. Tecnologias Computacionales]{Fulano Rodriguez}{a00000002@tec.mx}
+\addautor[IMT]{Nombre Autor Tres}{a00000003@tec.mx}
+\addautor{Nombre Autor Cuatro}{a0000004@tec.mx}
+\addautor{Nombre Autor Cinco}{a0000005@tec.mx}
 % ==============================================================
 
 \begin{document}
@@ -276,7 +300,11 @@
 \centering
 \thispagestyle{empty}
 
-{\small\textsc{Instituto Tecnológico y de Estudios Superiores de Monterrey}}
+{\large\textsc{Instituto Tecnológico y de Estudios Superiores de Monterrey}}
+
+\vspace{0.2cm}
+
+{\normalsize\textsc{\facultad}}
 
 \vspace{0.6cm}
 \includegraphics[scale=0.15]{logo.png}
@@ -287,15 +315,11 @@
 
 {\LARGE\bfseries \titulo}
 
-\vspace{0.4cm}
+\vspace{1.2cm}
 
-{\large\itshape \subtitulo}
+\noindent\autores
 
-\vspace{1cm}
-
-{\normalsize\textsc{\autor\ $\cdot$\ \matricula}}
-
-\vspace{0.6cm}
+\vspace{0.8cm}
 
 {\small \curso\quad\textbar\quad\profesor}
 
@@ -305,7 +329,9 @@
 
 \vspace{0.4cm}
 
-\noindent{\small\textsc{\campus}\hfill\textsc{\fecha}}
+\noindent{\small\textsc{\campus}\hfill\textsc{\fecha}}%
+\par\vspace{-\baselineskip}%
+\centerline{\scriptsize\textit{Documento compuesto en \LaTeX.}}
 
 \end{titlepage}
 
