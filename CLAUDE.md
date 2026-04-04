@@ -30,7 +30,7 @@ All content lives in `report.tex`. The file is organized into clearly marked sec
 5. **Math macros** — Number sets (`\N`, `\Z`, `\Q`, `\R`, `\C`), Greek shortcuts (`\eps`, `\del`), paired delimiters (`\abs`, `\norm`, `\inner`, `\ceil`, `\floor`), Spanish operators (`\sen`, `\tg`).
 6. **Section formatting** — Custom `titlesec` styles with `\sffamily` headings and horizontal rule under `\section`.
 7. **Header/footer** — `fancyhdr` using `\cursocorto`, `\titulocorto`, and page number.
-8. **Bibliography** — Inline `thebibliography` (no BibTeX/biblatex).
+8. **Bibliography** — `biblatex` with `style=science` and `biber` backend; entries live in `references.bib`.
 
 ## Key Conventions
 

@@ -43,7 +43,12 @@
 
 % --- Diagramas ---
 \usepackage{tikz}
+\usetikzlibrary{babel}
 \usepackage{tikz-cd}
+
+% --- Bibliografía (biblatex + biber) ---
+\usepackage[style=science, backend=biber]{biblatex}
+\addbibresource{references.bib}
 
 % --- Referencias cruzadas (siempre al final) ---
 \usepackage{hyperref}
@@ -273,22 +278,22 @@
 % ==============================================================
 % DATOS DEL REPORTE — editar solo esta sección
 % ==============================================================
-\newcommand{\titulo}{Título Completo del Reporte}
-\newcommand{\titulocorto}{Título Corto}          % se muestra en encabezados
+\newcommand{\titulo}{Guía Completa de la Plantilla de Reportes para Estudiantes del Tecnológico de Monterrey}
+\newcommand{\titulocorto}{Guía Plantilla}         % se muestra en encabezados
 \newcommand{\facultad}{Escuela de Ingeniería y Ciencias}
-\newcommand{\curso}{MA1234 --- Nombre del Curso}
-\newcommand{\cursocorto}{MA1234}                  % se muestra en encabezados
-\newcommand{\profesor}{Nombre del Profesor}
-\newcommand{\campus}{Campus}
+\newcommand{\curso}{MA1234 --- Curso de Ejemplo}
+\newcommand{\cursocorto}{MA1234}                   % se muestra en encabezados
+\newcommand{\profesor}{Dr.\ María García López}
+\newcommand{\campus}{Campus Monterrey}
 \newcommand{\fecha}{\today}
 
 % Autores (agregar uno por línea)
 % Uso: \addautor[Carrera]{Nombre}{correo}  — la carrera es opcional
-\addautor[Ing. Ciencias de datos y Matematicas]{Angel E. Luna}{a00842657@tec.mx}
-\addautor[Ing. Tecnologias Computacionales]{Fulano Rodriguez}{a00000002@tec.mx}
-\addautor[IMT]{Nombre Autor Tres}{a00000003@tec.mx}
-\addautor{Nombre Autor Cuatro}{a0000004@tec.mx}
-\addautor{Nombre Autor Cinco}{a0000005@tec.mx}
+\addautor[Ing. en Ciencia de Datos y Matemáticas]{Nombre Autor Uno}{a00000001@tec.mx}
+\addautor[Ing. en Tecnologías Computacionales]{Nombre Autor Dos}{a00000002@tec.mx}
+\addautor[Ing. en Física Industrial]{Nombre Autor Tres}{a00000003@tec.mx}
+\addautor[Ing. en Robótica y Sistemas Inteligentes]{Nombre Autor Cuatro}{a00000004@tec.mx}
+\addautor[Ing. en Biotecnología]{Nombre Autor Cinco}{a00000005@tec.mx}
 % ==============================================================
 
 \begin{document}
@@ -302,24 +307,24 @@
 
 {\large\textsc{Instituto Tecnológico y de Estudios Superiores de Monterrey}}
 
-\vspace{0.2cm}
+\vspace{0.15cm}
 
 {\normalsize\textsc{\facultad}}
 
-\vspace{0.6cm}
-\includegraphics[scale=0.15]{logo.png}
+\vspace{0.4cm}
+\includegraphics[scale=0.14]{logo.png}
 
-\vspace{0.8cm}
+\vspace{0.5cm}
 {\color{colordef!70!black}\rule{\linewidth}{1pt}}
-\vspace{0.8cm}
+\vspace{0.5cm}
 
 {\LARGE\bfseries \titulo}
 
-\vspace{1.2cm}
+\vspace{0.8cm}
 
 \noindent\autores
 
-\vspace{0.8cm}
+\vspace{0.4cm}
 
 {\small \curso\quad\textbar\quad\profesor}
 
@@ -327,7 +332,7 @@
 
 {\color{colordef!70!black}\rule{\linewidth}{0.6pt}}
 
-\vspace{0.4cm}
+\vspace{0.3cm}
 
 \noindent{\small\textsc{\campus}\hfill\textsc{\fecha}}%
 \par\vspace{-\baselineskip}%
@@ -339,16 +344,12 @@
 % RESUMEN
 % --------------------------------------------------------------
 \begin{abstract}
-En este reporte se estudian las propiedades analíticas fundamentales
-de las funciones reales, con énfasis en la noción de límite, continuidad
-y diferenciabilidad. Se presentan las definiciones formales en el marco
-de la topología estándar de $\R$, junto con los resultados principales
-que garantizan la unicidad del límite y su compatibilidad con las
-operaciones algebraicas elementales. Los métodos numéricos de
-cuadratura sirven como motivación aplicada para evaluar la precisión
-de las aproximaciones obtenidas. Los resultados confirman que la regla
-del trapecio compuesta alcanza un error de orden $\mathcal{O}(h^2)$,
-en concordancia con la teoría clásica de integración numérica.
+Este documento es una guía práctica y, a la vez, una demostración en
+vivo de todas las funcionalidades que ofrece la plantilla de reportes
+para estudiantes del Tecnológico de Monterrey. Cada sección presenta
+una característica de la plantilla y la ilustra directamente, de modo
+que el lector pueda usar este PDF como referencia visual al preparar
+sus propios reportes~\cite{lamport1994}.
 \end{abstract}
 
 \newpage
@@ -359,336 +360,394 @@ en concordancia con la teoría clásica de integración numérica.
 \tableofcontents
 \newpage
 
-% --------------------------------------------------------------
-\section{Introducción}
-% --------------------------------------------------------------
+% ==============================================================
+\section{Introducción y portada}\label{sec:intro}
+% ==============================================================
 
-El análisis matemático constituye el fundamento sobre el cual se
-construyen buena parte de las herramientas de la ciencia aplicada y
-la ingeniería. En particular, los conceptos de límite y continuidad
-permiten formalizar la intuición de proximidad y comportamiento
-local de funciones, dotando de rigor a procedimientos que de otro
-modo solo podrían justificarse heurísticamente~\cite{rudin1976}.
+Esta plantilla está diseñada para que los estudiantes del ITESM
+redacten reportes académicos con formato profesional sin necesidad de
+modificar el preámbulo de \LaTeX{}~\cite{lamport1994}. Basta editar
+la sección \texttt{DATOS DEL REPORTE} en el archivo fuente para
+personalizar los metadatos del documento.
 
-La motivación central de este trabajo es el estudio de funciones
-$f\colon \R \to \R$ bajo condiciones de regularidad progresivamente
-más fuertes: primero acotación local, luego continuidad y finalmente
-diferenciabilidad. Este enfoque estratificado permite identificar con
-precisión qué propiedades adicionales se ganan al imponer cada
-condición, y es consistente con la metodología empleada en trabajos
-previos sobre análisis real~\cite{apostol1974, bartle2000}.
+La portada se genera automáticamente a partir de los siguientes
+comandos: \verb|\titulo|, \verb|\titulocorto|, \verb|\facultad|,
+\verb|\curso|, \verb|\cursocorto|, \verb|\profesor|, \verb|\campus|
+y \verb|\fecha|. Los autores se agregan con
+\verb|\addautor[Carrera]{Nombre}{correo}|, donde el argumento de
+carrera es opcional. En esta guía se incluyen cuatro autores como
+ejemplo: tres con carrera y uno sin ella.
 
-Como aplicación directa, se evalúa la regla del trapecio como método
-de integración numérica para $f \in C^2([a,b])$. El error de
-aproximación se controla mediante el segundo momento de la segunda
-derivada de $f$, y los experimentos numéricos presentados en la
-\cref{tab:resultados} confirman la tasa de convergencia teórica.
-A lo largo del documento se utiliza la notación estándar:
-$\N$, $\Z$, $\Q$, $\R$ y $\C$ denotan los conjuntos de números
-naturales, enteros, racionales, reales y complejos, respectivamente.
+Los encabezados de página muestran \verb|\cursocorto| a la izquierda,
+\verb|\titulocorto| al centro y el número de página a la derecha
+--- obsérvense los encabezados de esta misma página como ejemplo.
 
-El documento se organiza del siguiente modo. La \cref{sec:marco}
-establece las definiciones y resultados teóricos necesarios. La
-\cref{sec:resultados} presenta los experimentos numéricos y el
-análisis de error. Finalmente, la \cref{sec:conclusiones} resume
-las conclusiones y propone líneas de investigación futura.
+La plantilla emplea cuatro colores semánticos: \textcolor{colordef}{%
+\textbf{colordef}} para definiciones, \textcolor{colorteor}{%
+\textbf{colorteor}} para teoremas y resultados afines,
+\textcolor{colorej}{\textbf{colorej}} para ejemplos y
+\textcolor{colorobs}{\textbf{colorobs}} para observaciones y
+ejercicios.
 
-% --------------------------------------------------------------
-\section{Marco Teórico}\label{sec:marco}
-% --------------------------------------------------------------
+% ==============================================================
+\section{Estructura del documento}\label{sec:estructura}
+% ==============================================================
 
-Esta sección recoge las definiciones y resultados que fundamentan
-el análisis posterior. Se parte de la definición épsilon-delta del
-límite y se deducen las propiedades de continuidad y derivabilidad
-que se utilizarán en los cálculos de error de cuadratura.
+Las secciones usan formato \textsf{\textbf{sans-serif negrita}} con
+una línea horizontal debajo. Las subsecciones son
+\textsf{\textbf{sans-serif negrita}} de tamaño normal, y las
+sub-subsecciones usan \textit{cursiva}.
 
-\subsection{Límites y continuidad}
+\subsection{Ejemplo de subsección}
 
-\begin{definicion}{Límite de una función}{lim}
-    Sea $f\colon A \to \R$ con $A \subseteq \R$, y sea $a$ un punto de
-    acumulación de $A$. Decimos que $L \in \R$ es el \emph{límite} de $f$
-    en $a$, y escribimos $\lim_{x \to a} f(x) = L$, si para todo
-    $\eps > 0$ existe $\del > 0$ tal que
-    \[
-        0 < \abs{x - a} < \del
-        \implies
-        \abs{f(x) - L} < \eps.
-    \]
+Este párrafo demuestra cómo luce una subsección. El espaciado entre
+párrafos y la indentación están configurados globalmente en el
+preámbulo.
+
+\subsubsection{Ejemplo de sub-subsección}
+
+Este es el nivel más profundo de sección numerada disponible en la
+plantilla. Su encabezado aparece en cursiva.
+
+\subsection{Listas}
+
+La plantilla carga el paquete \texttt{enumitem}, que permite
+personalizar listas fácilmente.
+
+\begin{enumerate}
+    \item Editar la sección \texttt{DATOS DEL REPORTE} con los metadatos del proyecto.
+    \item Escribir el contenido del reporte en el cuerpo del documento.
+    \item Compilar con \texttt{latexmk -pdf report.tex} o \texttt{pdflatex report.tex}.
+\end{enumerate}
+
+Herramientas recomendadas para compilar:
+
+\begin{itemize}
+    \item Overleaf (editor en línea, sin instalación local).
+    \item VS Code con la extensión LaTeX Workshop.
+    \item TeXShop (macOS) o TeXworks (multiplataforma).
+    \item Prism (antes Crixet).
+\end{itemize}
+
+También es posible personalizar las etiquetas de las listas. Por
+ejemplo, con \verb|[label=(\alph*)]|:
+
+\begin{enumerate}[label=(\alph*)]
+    \item Primera opción.
+    \item Segunda opción.
+    \item Tercera opción.
+\end{enumerate}
+
+% ==============================================================
+\section{Ambientes de teoremas}\label{sec:teoremas}
+% ==============================================================
+
+La plantilla define ocho ambientes con \texttt{tcolorbox}: cuatro de
+estilo enmarcado (\texttt{definicion}, \texttt{teorema}, \texttt{lema},
+\texttt{proposicion}, \texttt{corolario}) y dos de estilo minimalista
+con barra lateral (\texttt{observacion}, \texttt{ejercicio}), más el
+ambiente \texttt{ejemplo}. A continuación se muestra cada uno.
+
+\subsection{Definiciones}
+
+\begin{definicion}{Espacio métrico}{metrico}
+    Un \emph{espacio métrico} es un par $(X, d)$ donde $X$ es un
+    conjunto no vacío y $d\colon X \times X \to \R$ es una función
+    (llamada \emph{métrica}) que satisface, para todo $x, y, z \in X$:
+    \begin{enumerate}[label=(\roman*)]
+        \item $d(x, y) \geq 0$, con $d(x,y) = 0$ si y solo si $x = y$.
+        \item $d(x, y) = d(y, x)$ \hfill (simetría).
+        \item $d(x, z) \leq d(x, y) + d(y, z)$ \hfill (desigualdad triangular).
+    \end{enumerate}
 \end{definicion}
 
-La siguiente propiedad es elemental pero estratégica: garantiza que
-toda función con límite finito queda localmente acotada, hecho que
-se invocará de manera recurrente en las demostraciones de la sección
-siguiente.
+\subsection{Teoremas, lemas, proposiciones y corolarios}
 
-\begin{lema}{Acotación local}{acot}
-    Sea $\lim_{x \to a} f(x) = L$. Entonces existe $\del > 0$ tal que
-    $f$ está acotada en $(a - \del,\, a + \del) \setminus \{a\}$.
-\end{lema}
-
-\begin{proof}
-    Tomando $\eps = 1$ en la definición de límite, existe $\del > 0$
-    con $\abs{f(x) - L} < 1$ siempre que $0 < \abs{x - a} < \del$.
-    Por la desigualdad triangular,
-    \[
-        \abs{f(x)} \leq \abs{f(x) - L} + \abs{L} < 1 + \abs{L},
-    \]
-    de modo que $f$ queda acotada por $1 + \abs{L}$ en dicho intervalo.
-\end{proof}
-
-\begin{teorema}{Unicidad del límite}{unicidad}
-    Si $\lim_{x \to a} f(x) = L$ y $\lim_{x \to a} f(x) = M$,
-    entonces $L = M$.
+\begin{teorema}{Teorema de Bolzano}{bolzano}
+    Sea $f\colon [a,b] \to \R$ continua con $f(a) \cdot f(b) < 0$.
+    Entonces existe $c \in (a, b)$ tal que $f(c) = 0$.
 \end{teorema}
 
 \begin{proof}
-    Supóngase que $L \neq M$ y sea $\eps = \frac{\abs{L - M}}{2} > 0$.
-    Por hipótesis existen $\del_1, \del_2 > 0$ tales que
-    \begin{align*}
-        0 < \abs{x-a} < \del_1 &\implies \abs{f(x) - L} < \eps, \\
-        0 < \abs{x-a} < \del_2 &\implies \abs{f(x) - M} < \eps.
-    \end{align*}
-    Para $0 < \abs{x - a} < \del \coloneqq \min(\del_1, \del_2)$,
-    la desigualdad triangular da
-    \[
-        \abs{L - M} \leq \abs{f(x) - L} + \abs{f(x) - M}
-                    < 2\eps = \abs{L - M},
-    \]
-    una contradicción. Luego $L = M$.
+    Se construyen por bisección sucesiones $(a_n)$ y $(b_n)$ con
+    $f(a_n) \cdot f(b_n) < 0$ y $b_n - a_n = (b - a)/2^n$. Por el
+    axioma del supremo, ambas convergen a un punto $c \in [a,b]$.
+    La continuidad de $f$ y la condición de signos fuerzan $f(c) = 0$.
 \end{proof}
 
-\begin{corolario}{}{lim-unico}
-    El límite de una función, cuando existe, es único. En consecuencia,
-    la notación $\lim_{x \to a} f(x) = L$ está bien definida
-    (véase el \cref{thm:unicidad}).
+\begin{lema}{Acotación de funciones continuas en compactos}{acotacion}
+    Si $f\colon [a,b] \to \R$ es continua, entonces $f$ es acotada
+    en $[a,b]$.
+\end{lema}
+
+\begin{proposicion}{Compacidad secuencial en $\R^n$}{compacidad}
+    Un subconjunto $K \subseteq \R^n$ es compacto si y solo si es
+    cerrado y acotado.
+\end{proposicion}
+
+\begin{corolario}{}{bolzano-cor}
+    Bajo las hipótesis del \cref{thm:bolzano}, si además $f$ es
+    estrictamente monótona, entonces la raíz $c$ es única.
 \end{corolario}
 
-\begin{definicion}{Continuidad puntual}{cont}
-    Una función $f\colon A \to \R$ es \emph{continua en} $a \in A$ si
-    \[
-        \lim_{x \to a} f(x) = f(a),
-    \]
-    es decir, para todo $\eps > 0$ existe $\del > 0$ tal que
-    $\abs{x - a} < \del$ implica $\abs{f(x) - f(a)} < \eps$.
-    Si $f$ es continua en todo punto de $A$, se escribe $f \in C(A)$.
-\end{definicion}
+\subsection{Ejemplos, observaciones y ejercicios}
 
-\subsection{Diferenciabilidad y suavidad}
-
-\begin{definicion}{Derivada}{deriv}
-    Sea $f\colon (a,b) \to \R$ y $x_0 \in (a,b)$. La \emph{derivada}
-    de $f$ en $x_0$ es el límite
-    \[
-        f'(x_0) \coloneqq \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h},
-    \]
-    siempre que exista y sea finito. Decimos que $f$ es diferenciable en
-    $x_0$ si dicho límite existe.
-\end{definicion}
-
-\begin{proposicion}{Diferenciabilidad implica continuidad}{dif-cont}
-    Si $f$ es diferenciable en $x_0$, entonces $f$ es continua en $x_0$.
-\end{proposicion}
-
-\begin{proof}
-    Escribimos $f(x_0 + h) - f(x_0) = h \cdot \dfrac{f(x_0+h)-f(x_0)}{h}$.
-    Tomando límite cuando $h \to 0$,
-    \[
-        \lim_{h \to 0} \bigl[f(x_0 + h) - f(x_0)\bigr]
-        = \lim_{h \to 0} h \cdot f'(x_0) = 0,
-    \]
-    lo que prueba la continuidad.
-\end{proof}
-
-\begin{proposicion}{Desigualdad triangular en $\R^n$}{tri}
-    Para todo $x, y \in \R^n$ se tiene
-    \[
-        \norm{x + y} \leq \norm{x} + \norm{y}.
-    \]
-\end{proposicion}
-
-\begin{proof}
-    Se sigue directamente de la identidad de polarización y la
-    desigualdad de Cauchy-Schwarz:
-    \[
-        \norm{x+y}^2 = \norm{x}^2 + 2\inner{x,y} + \norm{y}^2
-        \leq \norm{x}^2 + 2\norm{x}\norm{y} + \norm{y}^2
-        = \bigl(\norm{x} + \norm{y}\bigr)^2. \qedhere
-    \]
-\end{proof}
-
-\subsection{Ejemplos y observaciones}
-
-\begin{ejemplo}{Cálculo directo de un límite}{lim-directo}
-    Calcular $\displaystyle\lim_{x \to 2}(3x^2 - 1)$.
-
-    \medskip
-    Dado $\eps > 0$, se busca $\del > 0$ tal que $\abs{x - 2} < \del$
-    implique $\abs{(3x^2 - 1) - 11} < \eps$. Observar que
-    \begin{align*}
-        \abs{3x^2 - 12}
-        &= 3\abs{x^2 - 4}
-         = 3\abs{x-2}\abs{x+2}.
-    \end{align*}
-    Si $\abs{x - 2} < 1$, entonces $\abs{x + 2} < 5$, luego
-    $\abs{3x^2 - 12} < 15\abs{x-2}$.
-    Basta tomar $\del = \min\!\left(1,\, \frac{\eps}{15}\right)$.
+\begin{ejemplo}{Métrica discreta}{discreta}
+    Sea $X$ un conjunto no vacío y defínase $d(x, y) = 1$ si $x \neq y$
+    y $d(x, x) = 0$. Entonces $(X, d)$ es un espacio métrico según la
+    \cref{def:metrico}: la simetría y la no negatividad son inmediatas,
+    y la desigualdad triangular se cumple porque $1 \leq 1 + 1$.
 \end{ejemplo}
 
-\begin{observacion}{Continuidad de polinomios}{}
-    Todo polinomio $p\colon \R \to \R$ es continuo en $\R$, pues el
-    argumento del \cref{ej:lim-directo} se generaliza por inducción al
-    grado del polinomio. Asimismo, toda función racional es continua
-    en su dominio natural.
+\begin{observacion}{Topología inducida}{}
+    Toda métrica $d$ en $X$ induce una topología cuyos abiertos son
+    uniones de bolas $B(x, r) = \{y \in X : d(x,y) < r\}$. En el caso
+    de la métrica discreta del \cref{ej:discreta}, todo subconjunto de
+    $X$ es abierto.
 \end{observacion}
 
-\begin{ejercicio}{Para el lector}{}
-    Sea $f, g\colon \R \to \R$ con $\lim_{x \to a} f(x) = L$ y
-    $\lim_{x \to a} g(x) = M$. Demostrar que
-    \[
-        \lim_{x \to a} \bigl[f(x) + g(x)\bigr] = L + M.
-    \]
-    \emph{Sugerencia:} usar el \cref{lem:acot} para controlar cada
-    término por separado.
+\begin{ejercicio}{Completitud de $\R$}{completitud}
+    Demuestre que $(\R, \abs{\cdot})$ es un espacio métrico completo,
+    es decir, que toda sucesión de Cauchy en $\R$ converge.
+
+    \emph{Sugerencia:} utilice el axioma del supremo y el
+    \cref{lem:acotacion}.
 \end{ejercicio}
 
-% --------------------------------------------------------------
-\section{Resultados}\label{sec:resultados}
-% --------------------------------------------------------------
+% ==============================================================
+\section{Matemáticas y ecuaciones}\label{sec:matematicas}
+% ==============================================================
 
-\subsection{Fórmula del trapecio y estimación del error}
+\subsection{Modo en línea y modo display}
 
-Sea $f \in C^2([a,b])$. La regla del trapecio aproxima la integral
-definida mediante la interpolación lineal de $f$ en los extremos del
-intervalo. La siguiente identidad cuantifica el error exacto de dicha
-aproximación.
+Los conjuntos numéricos se escriben con macros de un carácter:
+$\N \subset \Z \subset \Q \subset \R \subset \C$. El modo display
+sin numerar usa \verb|\[ ... \]|:
+\[
+    e^{i\pi} + 1 = 0.
+\]
 
-\begin{equation}\label{eq:trapecio}
-    \int_a^b f(x)\, dx
-    = \frac{b-a}{2}\bigl[f(a) + f(b)\bigr]
-      - \frac{(b-a)^3}{12} f''(\xi)
+Una ecuación numerada con etiqueta:
+\begin{equation}\label{eq:euler}
+    e^{i\theta} = \cos\theta + i\,\sen\theta.
 \end{equation}
 
-para algún $\xi \in (a, b)$ (regla del trapecio con término de error
-exacto de Hermite). El desarrollo completo de la demostración es:
+\subsection{Ecuaciones multilínea}
 
+El ambiente \texttt{align} numera cada línea:
 \begin{align}
-    \int_a^b f(x)\, dx
-    &= \int_a^b \Bigl[f(a) + f'(a)(x-a) + \frac{f''(\xi_x)}{2}(x-a)^2\Bigr] dx
-    \notag \\
-    &= f(a)(b-a) + \frac{f'(a)(b-a)^2}{2}
-       + \frac{1}{2}\int_a^b f''(\xi_x)(x-a)^2\, dx
-    \notag \\
-    &= \frac{b-a}{2}\bigl[f(a) + f(b)\bigr]
-       - \frac{(b-a)^3}{12}f''(\xi). \label{eq:desarrollo}
+    \sum_{k=1}^{n} k &= \frac{n(n+1)}{2}, \label{eq:suma} \\
+    \sum_{k=1}^{n} k^2 &= \frac{n(n+1)(2n+1)}{6}. \label{eq:suma2}
 \end{align}
 
-\subsection{Regla compuesta y convergencia}
+Con \texttt{align*} no se numeran:
+\begin{align*}
+    (a + b)^2 &= a^2 + 2ab + b^2, \\
+    (a - b)^2 &= a^2 - 2ab + b^2.
+\end{align*}
 
-Para la regla del trapecio compuesta con $n$ subintervalos de longitud
-$h = (b-a)/n$, el error total satisface la cota
-
-\begin{equation}\label{eq:error-compuesto}
-    E_n(f) \coloneqq \abs*{\int_a^b f(x)\,dx - T_n(f)}
-    \leq \frac{(b-a)^3}{12 n^2}\,\max_{\xi\in[a,b]}\abs{f''(\xi)},
+El ambiente \texttt{cases} sirve para funciones definidas a trozos:
+\begin{equation}\label{eq:signo}
+    \operatorname{sgn}(x) =
+    \begin{cases}
+        +1 & \text{si } x > 0, \\
+         0 & \text{si } x = 0, \\
+        -1 & \text{si } x < 0.
+    \end{cases}
 \end{equation}
 
-donde $T_n(f) = h\!\left[\dfrac{f(a)+f(b)}{2}
-+ \sum_{k=1}^{n-1} f(a + kh)\right]$ es la suma de trapecios. La
-\cref{eq:error-compuesto} muestra que el error decae como
-$\mathcal{O}(h^2) = \mathcal{O}(n^{-2})$, lo que clasifica al método
-como de orden dos.
+\subsection{Matrices y delimitadores}
 
-Adicionalmente, la siguiente identidad de Euler-Maclaurin relaciona
-la suma discreta con la integral continua mediante correcciones de
-orden superior:
+Matrices con paréntesis y con corchetes:
+\[
+    A = \begin{pmatrix}
+        1 & 2 \\
+        3 & 4
+    \end{pmatrix}, \qquad
+    B = \begin{bmatrix}
+        a & b & c \\
+        d & e & f
+    \end{bmatrix}.
+\]
 
-\begin{equation}\label{eq:euler-maclaurin}
-    \sum_{k=0}^{n} {}'' f(a + kh)
-    = \frac{1}{h}\int_a^b f(x)\,dx
-    + \sum_{j=1}^{p} \frac{B_{2j}}{(2j)!}\,h^{2j-1}
-      \bigl[f^{(2j-1)}(b) - f^{(2j-1)}(a)\bigr]
-    + R_p,
-\end{equation}
+La plantilla provee delimitadores emparejados. Comparación entre la
+forma normal y la forma estrellada (auto-escalable):
+\[
+    \abs{\frac{a}{b}}
+    \quad\text{vs.}\quad
+    \abs*{\frac{a}{b}}, \qquad
+    \norm{\frac{x}{y}}
+    \quad\text{vs.}\quad
+    \norm*{\frac{x}{y}}, \qquad
+    \inner{\frac{u}{v}, w}
+    \quad\text{vs.}\quad
+    \inner*{\frac{u}{v}, w}.
+\]
 
-donde $B_{2j}$ son los números de Bernoulli, las comillas dobles en
-la suma indican que los términos extremos se toman con peso $1/2$, y
-$R_p = \mathcal{O}(h^{2p})$ es el término de resto.
+También piso y techo:
+\[
+    \floor{\frac{7}{2}} = 3, \qquad
+    \ceil{\frac{7}{2}} = 4, \qquad
+    \floor*{\frac{n^2+1}{3}}, \qquad
+    \ceil*{\frac{n^2+1}{3}}.
+\]
 
-\subsection{Resultados numéricos}
+\subsection{Operadores y atajos}
 
-La \cref{tab:resultados} resume los errores obtenidos al aplicar la
-regla del trapecio simple y compuesta ($n = 4$ subintervalos) a
-$f(x) = \sen(x)$ en distintos intervalos.
+Los operadores en español \verb|\sen| y \verb|\tg| producen texto
+recto en modo matemático:
+\[
+    \sen^2\theta + \cos^2\theta = 1,
+    \qquad
+    \tg\alpha = \frac{\sen\alpha}{\cos\alpha}.
+\]
 
-\begin{table}[h]
+Las letras griegas abreviadas \verb|\eps| y \verb|\del| se usan en
+argumentos $\eps$-$\del$: para todo $\eps > 0$ existe $\del > 0$
+tal que $\abs{x - a} < \del$ implica $\abs{f(x) - L} < \eps$.
+
+Otros operadores disponibles: $\Img(T)$, $\Ker(T)$, $\rango(A)$.
+
+Como se vio en la \cref{def:metrico}, la notación $\abs{\cdot}$
+resulta útil. La \cref{eq:euler} muestra la fórmula de Euler.
+
+% ==============================================================
+\section{Tablas y figuras}\label{sec:tablas}
+% ==============================================================
+
+\subsection{Tablas con booktabs}
+
+La \cref{tab:ambientes} resume los ocho ambientes de teoremas
+disponibles en esta plantilla.
+
+\begin{table}[ht]
     \centering
-    \caption{Error de la regla del trapecio para $f(x) = \sen(x)$.
-             La columna $E_{\mathrm{comp}}$ corresponde a $n = 4$
-             subintervalos.}
-    \label{tab:resultados}
-    \begin{tabular}{@{}lcccc@{}}
+    \caption{Ambientes de teoremas de la plantilla y su estilo visual.}
+    \label{tab:ambientes}
+    \begin{tabular}{@{}llll@{}}
         \toprule
-        Intervalo $[a,b]$ & Valor exacto & $T_1$ (simple) & $E_1$ & $E_{\mathrm{comp}}$ \\
+        Ambiente & Color & Estilo & Prefijo \\
         \midrule
-        $[0,\, \pi/2]$   & $1.000000$ & $0.785398$ & $2.15\times10^{-1}$ & $1.34\times10^{-2}$ \\
-        $[0,\, \pi/4]$   & $0.292893$ & $0.277785$ & $1.51\times10^{-2}$ & $9.48\times10^{-4}$ \\
-        $[0,\, \pi/8]$   & $0.076120$ & $0.075566$ & $5.54\times10^{-4}$ & $3.46\times10^{-5}$ \\
-        $[0,\, \pi/16]$  & $0.019122$ & $0.019087$ & $3.51\times10^{-5}$ & $2.19\times10^{-6}$ \\
+        \texttt{definicion}  & \textcolor{colordef}{colordef}  & caja enmarcada  & \texttt{def}  \\
+        \texttt{teorema}     & \textcolor{colorteor}{colorteor} & caja enmarcada  & \texttt{thm}  \\
+        \texttt{lema}        & \textcolor{colorteor}{colorteor} & caja enmarcada  & \texttt{lem}  \\
+        \texttt{proposicion} & \textcolor{colorteor}{colorteor} & caja enmarcada  & \texttt{prop} \\
+        \texttt{corolario}   & \textcolor{colorteor}{colorteor} & caja enmarcada  & \texttt{cor}  \\
+        \texttt{ejemplo}     & \textcolor{colorej}{colorej}    & caja enmarcada  & \texttt{ej}   \\
+        \texttt{observacion} & \textcolor{colorobs}{colorobs}  & barra lateral   & \texttt{obs}  \\
+        \texttt{ejercicio}   & \textcolor{colorobs}{colorobs}  & barra lateral   & \texttt{exer} \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-Los resultados de la \cref{tab:resultados} son consistentes con la
-cota teórica de la \cref{eq:error-compuesto}: al reducir el paso $h$
-a la mitad, el error $E_{\mathrm{comp}}$ disminuye aproximadamente
-en un factor de cuatro, confirmando la convergencia de orden dos.
+\subsection{Figuras}
 
-% --------------------------------------------------------------
+La \cref{fig:logo} muestra el logotipo del ITESM incluido con
+\verb|\includegraphics|.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.2\textwidth]{logo.png}
+    \caption{Logotipo del Tecnológico de Monterrey
+             (\texttt{logo.png}).}
+    \label{fig:logo}
+\end{figure}
+
+\subsection{Diagramas con TikZ}\label{subsec:tikz}
+
+La \cref{fig:seno} ilustra un gráfico sencillo dibujado con TikZ.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[scale=1.0]
+        % Ejes
+        \draw[->] (-0.5, 0) -- (7, 0) node[right] {$x$};
+        \draw[->] (0, -1.5) -- (0, 1.8) node[above] {$y$};
+        % Curva sen(x)
+        \draw[colorteor, thick, domain=0:6.28, samples=100]
+            plot (\x, {sin(\x r)});
+        % Curva cos(x)
+        \draw[colordef, thick, dashed, domain=0:6.28, samples=100]
+            plot (\x, {cos(\x r)});
+        % Marcas
+        \node[below] at (3.14, 0) {$\pi$};
+        \node[below] at (6.28, 0) {$2\pi$};
+        \node[left] at (0, 1) {$1$};
+        \node[left] at (0, -1) {$-1$};
+        % Leyenda
+        \draw[colorteor, thick] (4.5, 1.5) -- ++(0.5, 0)
+            node[right, black] {\small$\sen x$};
+        \draw[colordef, thick, dashed] (4.5, 1.1) -- ++(0.5, 0)
+            node[right, black] {\small$\cos x$};
+    \end{tikzpicture}
+    \caption{Gráficas de $\sen x$ y $\cos x$ en $[0, 2\pi]$.}
+    \label{fig:seno}
+\end{figure}
+
+La plantilla también carga \texttt{tikz-cd} para diagramas
+conmutativos. La \cref{fig:diagrama} muestra un cuadrado conmutativo.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzcd}
+        A \arrow[r, "f"] \arrow[d, "g"'] &
+        B \arrow[d, "h"] \\
+        C \arrow[r, "k"'] &
+        D
+    \end{tikzcd}
+    \caption{Diagrama conmutativo: $h \circ f = k \circ g$.}
+    \label{fig:diagrama}
+\end{figure}
+
+% ==============================================================
+\section{Referencias cruzadas}\label{sec:referencias}
+% ==============================================================
+
+La plantilla carga \texttt{cleveref} con la opción \texttt{spanish},
+de modo que las referencias cruzadas se generan automáticamente en
+español. Se usa \verb|\cref| en medio de oración y \verb|\Cref| al
+inicio.
+
+A modo de demostración, esta sección referencia los elementos creados
+a lo largo de la guía:
+
+\begin{itemize}
+    \item \textbf{Secciones:} \cref{sec:intro}, \cref{sec:estructura},
+        \cref{sec:teoremas}, \cref{sec:matematicas}, \cref{sec:tablas}.
+    \item \textbf{Definiciones:} \Cref{def:metrico}.
+    \item \textbf{Teoremas y afines:} \Cref{thm:bolzano},
+        \cref{lem:acotacion}, \cref{prop:compacidad},
+        \cref{cor:bolzano-cor}.
+    \item \textbf{Ejemplos:} \cref{ej:discreta}.
+    \item \textbf{Ecuaciones:} \cref{eq:euler}, \cref{eq:suma},
+        \cref{eq:suma2}, \cref{eq:signo}.
+    \item \textbf{Tablas:} \cref{tab:ambientes}.
+    \item \textbf{Figuras:} \cref{fig:logo}, \cref{fig:seno},
+        \cref{fig:diagrama}.
+\end{itemize}
+
+% ==============================================================
 \section{Conclusiones}\label{sec:conclusiones}
-% --------------------------------------------------------------
+% ==============================================================
 
-En este reporte se estudiaron las propiedades fundamentales del límite
-de funciones reales —incluyendo su unicidad (\cref{thm:unicidad}) y
-su comportamiento bajo operaciones algebraicas— y se demostró que la
-diferenciabilidad es una condición más fuerte que la continuidad
-(\cref{prop:dif-cont}). Los resultados numéricos de la
-\cref{tab:resultados} confirman que la regla del trapecio compuesta
-con $n$ subintervalos produce un error de orden $\mathcal{O}(n^{-2})$,
-en acuerdo con la estimación analítica de la \cref{eq:error-compuesto}.
+Esta guía ha recorrido todas las funcionalidades de la plantilla:
+portada automática con múltiples autores, resumen, índice, tres
+niveles de encabezado, ocho ambientes de teoremas con estilo
+profesional, ecuaciones en diversos formatos, macros matemáticas,
+tablas con \texttt{booktabs}, figuras, diagramas TikZ y
+\texttt{tikz-cd}, referencias cruzadas en español y bibliografía
+integrada.
 
-Las implicaciones de estos resultados son relevantes para el diseño
-de algoritmos de cuadratura adaptativa: la rapidez de convergencia
-cuadrática hace al método del trapecio competitivo en problemas donde
-$f''$ es uniformemente pequeña, mientras que métodos de mayor orden
-(e.g., Simpson, cuadratura gaussiana) son preferibles cuando $f$
-admite muchas derivadas. Como trabajo futuro se propone extender el
-análisis al caso multidimensional mediante la fórmula de Stokes y
-estudiar la estabilidad numérica de las correcciones de Euler-Maclaurin
-en presencia de singularidades de borde.
+Para usar la plantilla en un nuevo reporte, basta copiar el archivo
+fuente, modificar la sección \texttt{DATOS DEL REPORTE} con los
+metadatos del proyecto y reemplazar el cuerpo del documento con el
+contenido propio. El preámbulo está diseñado para no requerir
+modificaciones.
 
 % --------------------------------------------------------------
-\section*{Referencias}
+% REFERENCIAS (biblatex)
 % --------------------------------------------------------------
-\addcontentsline{toc}{section}{Referencias}
-
-\begin{thebibliography}{9}
-
-\bibitem{rudin1976}
-Rudin, W. (1976). \textit{Principles of Mathematical Analysis}
-(3rd ed.). McGraw-Hill.
-
-\bibitem{apostol1974}
-Apostol, T.~M. (1974). \textit{Mathematical Analysis}
-(2nd ed.). Addison-Wesley.
-
-\bibitem{bartle2000}
-Bartle, R.~G., \& Sherbert, D.~R. (2000).
-\textit{Introduction to Real Analysis} (3rd ed.). Wiley.
-
-\bibitem{burden2016}
-Burden, R.~L., Faires, J.~D., \& Burden, A.~M. (2016).
-\textit{Numerical Analysis} (10th ed.). Cengage Learning.
-
-\end{thebibliography}
+\nocite{*}
+\printbibliography[heading=bibintoc, title={Referencias}]
 
 \end{document}
